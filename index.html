@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A²N | Digital Business Launchpad - AI Se Seekhein Aur Kamayein</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for better readability */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .card-hover { transition: transform 0.2s, box-shadow 0.2s; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 15px 30px rgba(239, 68, 68, 0.1); }
+        .ai-message { border-top-left-radius: 1.5rem; border-top-right-radius: 1.5rem; border-bottom-right-radius: 0.5rem; border-bottom-left-radius: 1.5rem; }
+        .user-message { border-top-left-radius: 1.5rem; border-top-right-radius: 1.5rem; border-bottom-right-radius: 1.5rem; border-bottom-left-radius: 0.5rem; }
+        .thin-scroll::-webkit-scrollbar { width: 4px; }
+        .thin-scroll::-webkit-scrollbar-thumb { background-color: #fca5a5; border-radius: 10px; }
+        .loader { border-top-color: #fca5a5; animation: spin 1s ease-in-out infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 text-gray-800">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-md">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="#" class="text-3xl font-extrabold text-red-600">
+                A²N 🚀 Digital Launchpad
+            </a>
+            <nav class="hidden md:flex space-x-6 text-gray-600 font-medium">
+                <a href="#ai-tutor" class="hover:text-red-600 transition">AI Tutor</a>
+                <a href="#videos" class="hover:text-red-600 transition">Videos</a>
+                <a href="#business-ideas" class="hover:text-red-600 transition">Ideas</a>
+                <a href="#links" class="hover:text-red-600 transition">Resources</a>
+                <a href="#contact" class="hover:text-red-600 transition">Feedback</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto p-4 md:p-8 grid gap-12">
+
+        <!-- Hero Section -->
+        <section class="bg-red-50 p-6 md:p-10 rounded-2xl shadow-xl border border-red-200">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-red-700">Digital Marketing Se Business Shuru Karein</h1>
+            <p class="mt-4 text-lg text-gray-600">Seekhiye, Kamaiye, Aur Apne Sapnon Ko Digital Duniya Mein Udayan De! Aapka AI sahayak yahan hai.</p>
+            <a href="#ai-tutor" class="mt-6 inline-block px-8 py-3 bg-red-600 text-white font-semibold rounded-full shadow-lg hover:bg-red-700 transition transform hover:scale-105">
+                AI Se Sawaal Poochiye →
+            </a>
+        </section>
+
+        <!-- AI Tutor Section -->
+        <section id="ai-tutor" class="grid md:grid-cols-3 gap-8 items-start">
+            <div class="md:col-span-1">
+                <h2 class="text-3xl font-bold text-red-600 mb-3">A²N AI Business Guide</h2>
+                <p class="text-gray-600">Aap **web development, app development, coding** ya koi bhi business idea, digital marketing strategy ke baare mein pooch sakte hain. Main turant jawab dunga.</p>
+                <div class="mt-4 p-4 bg-red-100 rounded-lg text-sm text-red-700">
+                    <p class="font-bold">🚀 Example Queries:</p>
+                    <ul class="list-disc list-inside mt-1 space-y-1">
+                        <li>"Digital Marketing ka roadmap kya hai?"</li>
+                        <li>"App banane mein kitna kharcha aata hai?"</li>
+                        <li>"SEO kaise karte hain?"</li>
+                        <li>"Python seekhne ke baad kya karoon?"</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- AI Chat Box -->
+            <div class="md:col-span-2 bg-white rounded-xl shadow-2xl border p-4 md:p-6 h-[500px] flex flex-col">
+                <div id="chatBox" class="flex-1 overflow-y-auto space-y-4 p-2 thin-scroll mb-4">
+                    <!-- Initial AI Message -->
+                    <div class="flex justify-start">
+                        <div class="ai-message p-3 max-w-xs md:max-w-md bg-red-100 text-red-800 shadow">
+                            <span class="text-xs font-semibold block mb-1">A²N AI</span>
+                            Namaste! Main aapka AI business guide hoon. Aapki kya madad karoon? Kya aapko digital marketing, coding ya naye business ideas par jaankari chahiye?
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input and Loader -->
+                <div id="aiThinking" class="flex items-center space-x-2 text-sm text-red-500 mb-2 hidden">
+                    <div class="loader w-4 h-4 rounded-full border-2 border-dashed"></div>
+                    <span>AI jawab soch raha hai...</span>
+                </div>
+                <div class="flex gap-3">
+                    <input type="text" id="userChatInput" class="flex-1 border-2 border-red-300 rounded-full p-3 focus:ring-red-500 focus:border-red-500 transition" placeholder="Apna sawaal yahan likhein..." />
+                    <button id="sendChatBtn" class="px-6 py-3 bg-red-600 text-white rounded-full font-semibold hover:bg-red-700 transition">Send</button>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <!-- Videos Section -->
+        <section id="videos">
+            <h2 class="text-3xl font-bold text-red-600">🎥 Digital Marketing Aur Business Videos</h2>
+            <p class="text-gray-600 mb-6">Chune hue videos jo aapko business shuru karne aur digital marketing ki gehri samajh denge.</p>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Video Item 1: Digital Marketing Strategy -->
+                <div class="rounded-xl overflow-hidden bg-white shadow-lg border card-hover">
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/3XD1oMKg-N0?si=3rpp7XpSb5QjGs-w" title="Digital Marketing Tutorial for Beginners" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Digital Marketing Strategy (Hindi)</h4>
+                        <p class="text-sm text-gray-500">Shuruaat se lekar advanced tak, poori planning.</p>
+                    </div>
+                </div>
+
+                <!-- Video Item 2: Web Development / Coding Business -->
+                <div class="rounded-xl overflow-hidden bg-white shadow-lg border card-hover">
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/XuUbLHIRyuM?si=qWq1sr37aQyOOdrE" title="How to Start a Web Development Business" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Web Dev se paise kaise kamayein?</h4>
+                        <p class="text-sm text-gray-500">Freelancing aur agency shuru karne ka tareeka.</p>
+                    </div>
+                </div>
+
+                <!-- Video Item 3: Business Idea Generation -->
+                <div class="rounded-xl overflow-hidden bg-white shadow-lg border card-hover">
+                    <div class="aspect-video">
+                        <iframe class="w-full h-full" src="https://www.youtube.com/embed/5wBuPhkW5s4?si=n2WhyKxLUhtO1tKh" title="Best Small Business Ideas with Low Investment" allowfullscreen></iframe>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-lg">Naye Business Ideas (2024)</h4>
+                        <p class="text-sm text-gray-500">Kam investment mein zyada faayda.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <!-- Business Ideas & Resource Links -->
+        <section id="links" class="grid md:grid-cols-2 gap-8">
+            <div>
+                <h2 class="text-3xl font-bold text-red-600 mb-3">💡 Top Business Ideas (Start Digital)</h2>
+                <p class="text-gray-600 mb-4">In ideas par research karein aur AI se madad lein.</p>
+                <div class="space-y-4">
+                    <div class="p-4 bg-white rounded-lg shadow-md border card-hover">
+                        <h4 class="font-bold text-xl text-red-700">Micro SaaS (Software as a Service)</h4>
+                        <p class="text-sm text-gray-600">Kisi choti industry ki ek zaroorat poori karne wala simple tool bana kar monthly subscription par bechein.</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-lg shadow-md border card-hover">
+                        <h4 class="font-bold text-xl text-red-700">Niche Affiliate Marketing Blog</h4>
+                        <p class="text-sm text-gray-600">Kisi khaas topic par blog shuru karein aur Digital Marketing se traffic la kar commission kamayein.</p>
+                    </div>
+                    <div class="p-4 bg-white rounded-lg shadow-md border card-hover">
+                        <h4 class="font-bold text-xl text-red-700">Online Course Creator</h4>
+                        <p class="text-sm text-gray-600">Apne skills (Coding, Design, Marketing) ko online courses mein badlein aur bechein.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2 class="text-3xl font-bold text-red-600 mb-3">🔗 Business Resources & Platforms</h2>
+                <p class="text-gray-600 mb-4">Yeh websites aapke business ke safar mein madadgar hongi.</p>
+                <ul class="space-y-3">
+                    <li class="p-3 bg-white rounded-lg shadow-md border card-hover">
+                        <a href="https://www.upwork.com" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold text-lg">Upwork - Freelancing Platform</a>
+                        <p class="text-sm text-gray-600">Apni coding, design aur marketing skills bechein.</p>
+                    </li>
+                    <li class="p-3 bg-white rounded-lg shadow-md border card-hover">
+                        <a href="https://www.semrush.com" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold text-lg">SEMrush - Digital Marketing Tool</a>
+                        <p class="text-sm text-gray-600">SEO aur competitor analysis ke liye zaruri tool.</p>
+                    </li>
+                    <li class="p-3 bg-white rounded-lg shadow-md border card-hover">
+                        <a href="https://www.stripe.com" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold text-lg">Stripe - Online Payment Gateway</a>
+                        <p class="text-sm text-gray-600">Apne customers se online payments lene ke liye.</p>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        ---
+
+        <!-- Contact & Feedback Section -->
+        <section id="contact" class="bg-red-50 p-6 md:p-8 rounded-2xl shadow-xl border border-red-200">
+            <h2 class="text-3xl font-bold text-red-600 mb-4">✍️ Feedback Aur Contact</h2>
+            <p class="text-gray-600 mb-6">Humein batayein ki aapko yeh platform kaisa laga, ya phir koi sawaal ho toh poochiye.</p>
+
+            <form id="commentForm" class="grid gap-4 max-w-xl mx-auto">
+                <input id="commentName" placeholder="Aapka Naam" class="p-3 border-2 border-red-300 rounded-lg focus:ring-red-500 focus:border-red-500" />
+                <textarea id="commentText" placeholder="Aapka Feedback / Sawaal yahan likhein (Email par jawab milega)" rows="6" class="p-3 border-2 border-red-300 rounded-lg focus:ring-red-500 focus:border-red-500"></textarea>
+                <button type="submit" class="px-6 py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition">Feedback Bhejein</button>
+                <div id="contactMessage" class="hidden p-3 bg-green-100 text-green-700 rounded-lg font-medium">Aapka feedback record ho gaya hai! Shukriya.</div>
+            </form>
+
+            <div class="mt-8">
+                <h3 class="text-xl font-bold text-gray-700 mb-3">Pichle Comments</h3>
+                <div id="commentsList" class="space-y-4 max-w-xl mx-auto">
+                    <!-- Comments will be loaded here from local storage / Firestore -->
+                    <div class="p-4 bg-white rounded-lg shadow border">
+                        <p class="font-bold text-red-600">Guest</p>
+                        <p class="text-sm text-gray-500">2 days ago</p>
+                        <p class="mt-1">AI Tutor bahut madadgar hai. Mujhe Web Development shuru karne ka achha roadmap mila.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 py-8 border-t bg-white">
+        <div class="max-w-6xl mx-auto px-4 text-center text-sm text-gray-500">
+            © <span id="year"></span> A²N | Digital Business Launchpad.
+        </div>
+    </footer>
+
+    <script>
+        // Global utility function
+        const $ = (s) => document.querySelector(s);
+        const nowISO = () => new Date().toISOString();
+
+        // ------------------------------------
+        // 1. AI CHAT FUNCTIONALITY
+        // ------------------------------------
+        const chatBox = $('#chatBox');
+        const userChatInput = $('#userChatInput');
+        const sendChatBtn = $('#sendChatBtn');
+        const aiThinking = $('#aiThinking');
+        const apiKey = ""; // API Key is provided by Canvas environment
+
+        function appendMessage(from, text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex ${from === 'ai' ? 'justify-start' : 'justify-end'}`;
+
+            const contentDiv = document.createElement('div');
+            contentDiv.className = `p-3 max-w-xs md:max-w-md shadow-md ${from === 'ai' 
+                ? 'ai-message bg-red-100 text-red-800' 
+                : 'user-message bg-red-600 text-white'}`;
+            
+            contentDiv.innerHTML = `<span class="text-xs font-semibold block mb-1">${from === 'ai' ? 'A²N AI' : 'Aap'}</span>
+                                    <div class="whitespace-pre-wrap">${text}</div>`;
+            
+            messageDiv.appendChild(contentDiv);
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        async function getAiResponse(query) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+            const systemPrompt = "Aap ek friendly aur madadgar AI business guide hain. Aap Digital Marketing, Web/App Development, Coding, aur startup ideas ke baare mein concise aur practical salah dete hain. Jawab hamesha Hindi mein (Roman script) aur simple rakhein.";
+
+            const payload = {
+                contents: [{ parts: [{ text: query }] }],
+                tools: [{ "google_search": {} }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            aiThinking.classList.remove('hidden');
+
+            try {
+                let response;
+                let data;
+                
+                // Exponential backoff for API call
+                for (let i = 0; i < 3; i++) {
+                    response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.ok) {
+                        data = await response.json();
+                        break;
+                    }
+                    if (i < 2) await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
+                }
+
+                if (!response.ok) {
+                    throw new Error(`API error: ${response.statusText}`);
+                }
+                
+                const text = data.candidates?.[0]?.content?.parts?.[0]?.text || "Maaf kijiye, main abhi jawab nahi de paa raha hoon.";
+                appendMessage('ai', text);
+
+            } catch (error) {
+                console.error("AI API Error:", error);
+                appendMessage('ai', "Maaf kijiye, Server se connect nahi ho paya. Kripya thodi der baad koshish karein.");
+            } finally {
+                aiThinking.classList.add('hidden');
+            }
+        }
+
+        async function handleChatSend() {
+            const query = userChatInput.value.trim();
+            if (!query) return;
+
+            userChatInput.value = '';
+            appendMessage('user', query);
+            await getAiResponse(query);
+        }
+
+        sendChatBtn.addEventListener('click', handleChatSend);
+        userChatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                handleChatSend();
+            }
+        });
+
+
+        // ------------------------------------
+        // 2. CONTACT/FEEDBACK FUNCTIONALITY (Using localStorage for Demo)
+        // ------------------------------------
+
+        const commentsList = $('#commentsList');
+        const commentForm = $('#commentForm');
+        const contactMessage = $('#contactMessage');
+
+        function loadComments() {
+            try {
+                // Remove the initial static comment before loading from storage
+                if (commentsList.children.length > 0) {
+                    commentsList.innerHTML = '';
+                }
+                const stored = localStorage.getItem('bizlaunch_comments');
+                return stored ? JSON.parse(stored) : [];
+            } catch (e) {
+                console.error("Error loading comments:", e);
+                return [];
+            }
+        }
+
+        function saveComments(comments) {
+            localStorage.setItem('bizlaunch_comments', JSON.stringify(comments));
+        }
+
+        function renderComments() {
+            const comments = loadComments();
+            commentsList.innerHTML = ''; // Clear existing comments
+
+            if (comments.length === 0) {
+                 // Add static comment if none exist (for initial appearance)
+                 comments.push({ name: 'Guest', date: new Date(Date.now() - 172800000).toISOString(), text: 'AI Tutor bahut madadgar hai. Mujhe Web Development shuru karne ka achha roadmap mila.' });
+                 saveComments(comments);
+            }
+
+            comments.forEach(c => {
+                const date = new Date(c.date).toLocaleDateString('hi-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+                const el = document.createElement('div');
+                el.className = 'p-4 bg-white rounded-lg shadow border';
+                el.innerHTML = `<p class="font-bold text-red-600">${c.name}</p>
+                                <p class="text-sm text-gray-500">${date}</p>
+                                <p class="mt-1 whitespace-pre-wrap">${c.text}</p>`;
+                commentsList.appendChild(el);
+            });
+        }
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameInput = $('#commentName');
+            const textInput = $('#commentText');
+
+            const name = nameInput.value.trim() || 'Anonymous User';
+            const text = textInput.value.trim();
+
+            if (!text) {
+                contactMessage.textContent = "Kripya apna feedback likhein.";
+                contactMessage.className = 'p-3 bg-yellow-100 text-yellow-700 rounded-lg font-medium';
+                contactMessage.classList.remove('hidden');
+                setTimeout(() => contactMessage.classList.add('hidden'), 3000);
+                return;
+            }
+            
+            const newComment = { 
+                id: Date.now(), 
+                name: name, 
+                text: text, 
+                date: nowISO() 
+            };
+
+            const existingComments = loadComments();
+            existingComments.unshift(newComment);
+            saveComments(existingComments);
+            renderComments();
+
+            // Clear form and show success message
+            nameInput.value = '';
+            textInput.value = '';
+            
+            contactMessage.textContent = "Aapka feedback record ho gaya hai! Shukriya. 🙏";
+            contactMessage.className = 'p-3 bg-green-100 text-green-700 rounded-lg font-medium';
+            contactMessage.classList.remove('hidden');
+            setTimeout(() => contactMessage.classList.add('hidden'), 5000);
+        });
+
+        // ------------------------------------
+        // 3. INITIALIZATION
+        // ------------------------------------
+        function init() {
+            $('#year').textContent = new Date().getFullYear();
+            renderComments();
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
